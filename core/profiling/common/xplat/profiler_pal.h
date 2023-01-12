@@ -190,7 +190,7 @@ typedef struct
 #define _In_reads_opt_(x)
 #define _Out_writes_to_(x, y)
 
-#define _ASSERTE(condition) condition
+#define _ASSERTE(condition) assert((condition))
 
 #else
 #define WCHAR(str) L##str
