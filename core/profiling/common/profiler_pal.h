@@ -27,7 +27,7 @@ typedef intptr_t INT_PTR
 typedef uintptr_t UINT_PTR
 
 typedef int64_t LONGLONG;
-typedef unsigned int64_t ULONGLONG;
+typedef uint64_t ULONGLONG;
 typedef ULONGLONG DWORD64;
 typedef DWORD64 *PDWORD64;
 typedef LONGLONG *PLONG64;
@@ -73,19 +73,19 @@ typedef unsigned int *PUINT;
 typedef BYTE BOOLEAN;
 typedef BOOLEAN *PBOOLEAN;
 
-typedef unsigned int8_t UINT8;
-typedef signed int8_t INT8;
-typedef unsigned int16_t UINT16;
-typedef signed int16_t INT16;
-typedef unsigned int32_t UINT32, *PUINT32;
-typedef signed int32_t INT32, *PINT32;
-typedef unsigned int64_t UINT64, *PUINT64;
-typedef signed int64_t INT64, *PINT64;
+typedef uint8_t UINT8;
+typedef int8_t INT8;
+typedef uint16_t UINT16;
+typedef int16_t INT16;
+typedef uint32_t UINT32, *PUINT32;
+typedef int32_t INT32, *PINT32;
+typedef uint64_t UINT64, *PUINT64;
+typedef int64_t INT64, *PINT64;
 
-typedef unsigned int32_t ULONG32, *PULONG32;
-typedef signed int32_t LONG32, *PLONG32;
-typedef unsigned int64_t ULONG64;
-typedef signed int64_t LONG64;
+typedef uint32_t ULONG32, *PULONG32;
+typedef int32_t LONG32, *PLONG32;
+typedef uint64_t ULONG64;
+typedef int64_t LONG64;
 
 
 typedef VOID *HANDLE;
