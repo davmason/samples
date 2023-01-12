@@ -182,6 +182,8 @@ typedef struct
 #define E_ACCESSDENIED                   (HRESULT)0x80070005L
 #define E_PENDING                        (HRESULT)0x8000000AL
 
+#define _In_reads_opt_(x) x
+
 #else
 #define WCHAR(str) L##str
 #define PROFILER_STUB EXTERN_C void STDMETHODCALLTYPE
