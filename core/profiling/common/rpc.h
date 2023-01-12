@@ -13,6 +13,7 @@
 #define __uuidof(type)      IID_##type
 
 #define DECLSPEC_UUID(x)
+#define DECLSPEC_NOVTABLE
 
 #define MIDL_INTERFACE(x)   struct DECLSPEC_UUID(x) DECLSPEC_NOVTABLE
 
