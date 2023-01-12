@@ -15,8 +15,6 @@
 #ifndef __IUnknown_INTERFACE_DEFINED__
 #define __IUnknown_INTERFACE_DEFINED__
 
-typedef interface IUnknown IUnknown;
-
 typedef /* [unique] */ IUnknown *LPUNKNOWN;
 
 // 00000000-0000-0000-C000-000000000046
