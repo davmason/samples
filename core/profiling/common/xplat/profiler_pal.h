@@ -19,6 +19,8 @@
 
 #define UINT_PTR_FORMAT "lx"
 
+#define STDMETHODCALLTYPE
+
 #define PROFILER_STUB __attribute__((visibility("hidden"))) EXTERN_C void STDMETHODCALLTYPE
 
 typedef void VOID;
