@@ -23,10 +23,12 @@
 
 typedef void VOID;
 
+typedef char16_t WCHAR;
 typedef int LONG;
 typedef unsigned int ULONG;
 typedef intptr_t INT_PTR;
 typedef uintptr_t UINT_PTR;
+typedef size_t SIZE_T;
 
 typedef int64_t LONGLONG;
 typedef uint64_t ULONGLONG;
@@ -89,6 +91,13 @@ typedef int32_t LONG32, *PLONG32;
 typedef uint64_t ULONG64;
 typedef int64_t LONG64;
 
+typedef WCHAR *PWCHAR;
+typedef WCHAR *LPWCH, *PWCH;
+typedef CONST WCHAR *LPCWCH, *PCWCH;
+typedef WCHAR *NWPSTR;
+typedef WCHAR *LPWSTR, *PWSTR;
+
+typedef CONST WCHAR *LPCWSTR, *PCWSTR;
 
 typedef VOID *HANDLE;
 typedef HANDLE HWND;
