@@ -182,8 +182,8 @@ typedef struct
 #define E_ACCESSDENIED                   (HRESULT)0x80070005L
 #define E_PENDING                        (HRESULT)0x8000000AL
 
-#define _In_reads_opt_(x) x
-#define _Out_writes_to_(x) x
+#define _In_reads_opt_(x)
+#define _Out_writes_to_(x, y)
 
 #else
 #define WCHAR(str) L##str
