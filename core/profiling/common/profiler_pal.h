@@ -140,6 +140,13 @@ typedef ULONG CorElementType;
 
 typedef struct
 {
+	DWORD dwOSPlatformId;
+	DWORD dwOSMajorVersion;
+	DWORD dwOSMinorVersion;
+} OSINFO;
+
+typedef struct
+{
     USHORT usMajorVersion;
     USHORT usMinorVersion;
     USHORT usBuildNumber;
@@ -150,7 +157,7 @@ typedef struct
     ULONG ulProcessor;
     OSINFO *rOS;
     ULONG ulOS;
-}   ASSEMBLYMETADATA;
+} ASSEMBLYMETADATA;
 
 #else
 #define WCHAR(str) L##str
