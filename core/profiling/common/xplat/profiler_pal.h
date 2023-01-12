@@ -14,6 +14,33 @@
 #define __stdcall
 #define interface struct
 
+#define STDMETHODCALLTYPE    __cdecl
+#define STDMETHODVCALLTYPE   __cdecl
+
+#define STDAPICALLTYPE       __cdecl
+#define STDAPIVCALLTYPE      __cdecl
+
+#define STDMETHODIMP         HRESULT STDMETHODCALLTYPE
+#define STDMETHODIMP_(type)  type STDMETHODCALLTYPE
+
+#define STDMETHODIMPV        HRESULT STDMETHODVCALLTYPE
+#define STDMETHODIMPV_(type) type STDMETHODVCALLTYPE
+
+#define STDMETHOD(method)       virtual HRESULT STDMETHODCALLTYPE method
+#define STDMETHOD_(type,method) virtual type STDMETHODCALLTYPE method
+
+#define STDMETHODV(method)       virtual HRESULT STDMETHODVCALLTYPE method
+#define STDMETHODV_(type,method) virtual type STDMETHODVCALLTYPE method
+
+#define PURE                    = 0
+#define THIS_
+#define THIS                void
+
+#define DECLSPEC_NOVTABLE
+
+#define DECLARE_INTERFACE(iface)    interface DECLSPEC_NOVTABLE iface
+#define DECLARE_INTERFACE_(iface, baseiface)    interface DECLSPEC_NOVTABLE iface : public baseiface
+
 #define WCHAR(str) u##str
 
 #define CoTaskMemAlloc(cb) malloc(cb)
@@ -21,15 +48,13 @@
 
 #define UINT_PTR_FORMAT "lx"
 
-#define STDMETHODCALLTYPE
-
 #define PROFILER_STUB __attribute__((visibility("hidden"))) EXTERN_C void STDMETHODCALLTYPE
 
 typedef void VOID;
 
 typedef char16_t WCHAR;
 typedef int LONG;
-typedef unsigned int ULONG;
+typedef unsigned long ULONG;
 typedef intptr_t INT_PTR;
 typedef uintptr_t UINT_PTR;
 typedef size_t SIZE_T;
@@ -46,10 +71,12 @@ typedef short SHORT;
 typedef SHORT *PSHORT;
 typedef unsigned short USHORT;
 typedef USHORT *PUSHORT;
+typedef char CHAR;
 typedef unsigned char UCHAR;
 typedef UCHAR *PUCHAR;
 typedef char *PSZ;
 typedef ULONGLONG DWORDLONG;
+typedef long SCODE;
 
 typedef unsigned int DWORD; // NOTE: diff from  windows.h, for LP64 compat
 typedef unsigned int DWORD32, *PDWORD32;
@@ -144,34 +171,6 @@ inline int operator==(REFGUID guidOne, REFGUID guidOther)
 inline int operator!=(REFGUID guidOne, REFGUID guidOther)
     { return !IsEqualGUID(guidOne,guidOther); }
 
-typedef LONG32 mdToken;
-typedef mdToken mdModule;
-typedef mdToken mdTypeDef;
-typedef mdToken mdMethodDef;
-typedef mdToken mdFieldDef;
-typedef ULONG CorElementType;
-
-typedef struct
-{
-	DWORD dwOSPlatformId;
-	DWORD dwOSMajorVersion;
-	DWORD dwOSMinorVersion;
-} OSINFO;
-
-typedef struct
-{
-    USHORT usMajorVersion;
-    USHORT usMinorVersion;
-    USHORT usBuildNumber;
-    USHORT usRevisionNumber;
-    LPWSTR szLocale;
-    ULONG cbLocale;
-    DWORD *rProcessor;
-    ULONG ulProcessor;
-    OSINFO *rOS;
-    ULONG ulOS;
-} ASSEMBLYMETADATA;
-
 #define S_OK                             (HRESULT)0x00000000L
 #define S_FALSE                          (HRESULT)0x00000001L
 
@@ -187,13 +186,273 @@ typedef struct
 #define E_ACCESSDENIED                   (HRESULT)0x80070005L
 #define E_PENDING                        (HRESULT)0x8000000AL
 
+#define FACILITY_WINDOWS                 8
+#define FACILITY_URT                     19
+#define FACILITY_UMI                     22
+#define FACILITY_SXS                     23
+#define FACILITY_STORAGE                 3
+#define FACILITY_SSPI                    9
+#define FACILITY_SCARD                   16
+#define FACILITY_SETUPAPI                15
+#define FACILITY_SECURITY                9
+#define FACILITY_RPC                     1
+#define FACILITY_WIN32                   7
+#define FACILITY_CONTROL                 10
+#define FACILITY_NULL                    0
+#define FACILITY_MSMQ                    14
+#define FACILITY_MEDIASERVER             13
+#define FACILITY_INTERNET                12
+#define FACILITY_ITF                     4
+#define FACILITY_DPLAY                   21
+#define FACILITY_DISPATCH                2
+#define FACILITY_COMPLUS                 17
+#define FACILITY_CERT                    11
+#define FACILITY_ACS                     20
+#define FACILITY_AAF                     18
+
+#define NO_ERROR 0L
+
+#define SEVERITY_SUCCESS    0
+#define SEVERITY_ERROR      1
+
 #define SUCCEEDED(Status) ((HRESULT)(Status) >= 0)
 #define FAILED(Status) ((HRESULT)(Status)<0)
+#define IS_ERROR(Status) ((ULONG)(Status) >> 31 == SEVERITY_ERROR) // diff from win32
+#define HRESULT_CODE(hr)    ((hr) & 0xFFFF)
+#define SCODE_CODE(sc)      ((sc) & 0xFFFF)
+#define HRESULT_FACILITY(hr)  (((hr) >> 16) & 0x1fff)
+#define SCODE_FACILITY(sc)    (((sc) >> 16) & 0x1fff)
+#define HRESULT_SEVERITY(hr)  (((hr) >> 31) & 0x1)
+#define SCODE_SEVERITY(sc)    (((sc) >> 31) & 0x1)
 
 #define _In_reads_opt_(x)
 #define _Out_writes_to_(x, y)
+#define _Out_writes_to_opt_(x, y)
 
 #define _ASSERTE(condition) assert((condition))
+
+#define UNALIGNED
+
+#define DECLARE_INTERFACE(iface)    interface DECLSPEC_NOVTABLE iface
+#define DECLARE_INTERFACE_(iface, baseiface)    interface DECLSPEC_NOVTABLE iface : public baseiface
+
+typedef SHORT VARIANT_BOOL;
+#define VARIANT_TRUE ((VARIANT_BOOL)-1)
+#define VARIANT_FALSE ((VARIANT_BOOL)0)
+
+typedef WCHAR OLECHAR;
+typedef OLECHAR* LPOLESTR;
+typedef const OLECHAR* LPCOLESTR;
+
+typedef WCHAR *BSTR;
+
+typedef double DATE;
+
+typedef union tagCY {
+    struct {
+#if BIGENDIAN
+        LONG    Hi;
+        ULONG   Lo;
+#else
+        ULONG   Lo;
+        LONG    Hi;
+#endif
+    } u;
+    LONGLONG int64;
+} CY, *LPCY;
+
+typedef CY CURRENCY;
+
+typedef struct tagDEC {
+    // Decimal.cs treats the first two shorts as one long
+    // And they seriable the data so we need to little endian
+    // seriliazation
+    // The wReserved overlaps with Variant's vt member
+#if BIGENDIAN
+    union {
+        struct {
+            BYTE sign;
+            BYTE scale;
+        } u;
+        USHORT signscale;
+    } u;
+    USHORT wReserved;
+#else
+    USHORT wReserved;
+    union {
+        struct {
+            BYTE scale;
+            BYTE sign;
+        } u;
+        USHORT signscale;
+    } u;
+#endif
+    ULONG Hi32;
+    union {
+        struct {
+            ULONG Lo32;
+            ULONG Mid32;
+        } v;
+        ULONGLONG Lo64;
+    } v;
+} DECIMAL, *LPDECIMAL;
+
+#define DECIMAL_NEG ((BYTE)0x80)
+#define DECIMAL_SCALE(dec)       ((dec).u.u.scale)
+#define DECIMAL_SIGN(dec)        ((dec).u.u.sign)
+#define DECIMAL_SIGNSCALE(dec)   ((dec).u.signscale)
+#define DECIMAL_LO32(dec)        ((dec).v.v.Lo32)
+#define DECIMAL_MID32(dec)       ((dec).v.v.Mid32)
+#define DECIMAL_HI32(dec)        ((dec).Hi32)
+#define DECIMAL_LO64_GET(dec)    ((dec).v.Lo64)
+#define DECIMAL_LO64_SET(dec,value)   {(dec).v.Lo64 = value; }
+
+#define DECIMAL_SETZERO(dec) {DECIMAL_LO32(dec) = 0; DECIMAL_MID32(dec) = 0; DECIMAL_HI32(dec) = 0; DECIMAL_SIGNSCALE(dec) = 0;}
+
+typedef struct tagBLOB {
+    ULONG cbSize;
+    BYTE *pBlobData;
+} BLOB, *LPBLOB;
+
+interface IStream;
+interface IRecordInfo;
+
+typedef unsigned short VARTYPE;
+
+enum VARENUM {
+    VT_EMPTY    = 0,
+    VT_NULL = 1,
+    VT_I2   = 2,
+    VT_I4   = 3,
+    VT_R4   = 4,
+    VT_R8   = 5,
+    VT_CY   = 6,
+    VT_DATE = 7,
+    VT_BSTR = 8,
+    VT_DISPATCH = 9,
+    VT_ERROR    = 10,
+    VT_BOOL = 11,
+    VT_VARIANT  = 12,
+    VT_UNKNOWN  = 13,
+    VT_DECIMAL  = 14,
+    VT_I1   = 16,
+    VT_UI1  = 17,
+    VT_UI2  = 18,
+    VT_UI4  = 19,
+    VT_I8   = 20,
+    VT_UI8  = 21,
+    VT_INT  = 22,
+    VT_UINT = 23,
+    VT_VOID = 24,
+    VT_HRESULT  = 25,
+    VT_PTR  = 26,
+    VT_SAFEARRAY    = 27,
+    VT_CARRAY   = 28,
+    VT_USERDEFINED  = 29,
+    VT_LPSTR    = 30,
+    VT_LPWSTR   = 31,
+    VT_RECORD   = 36,
+    VT_INT_PTR  = 37,
+    VT_UINT_PTR = 38,
+
+    VT_FILETIME        = 64,
+    VT_BLOB            = 65,
+    VT_STREAM          = 66,
+    VT_STORAGE         = 67,
+    VT_STREAMED_OBJECT = 68,
+    VT_STORED_OBJECT   = 69,
+    VT_BLOB_OBJECT     = 70,
+    VT_CF              = 71,
+    VT_CLSID           = 72,
+
+    VT_VECTOR   = 0x1000,
+    VT_ARRAY    = 0x2000,
+    VT_BYREF    = 0x4000,
+    VT_TYPEMASK = 0xfff,
+};
+
+typedef struct tagVARIANT VARIANT, *LPVARIANT;
+typedef struct tagSAFEARRAY SAFEARRAY;
+
+struct tagVARIANT
+    {
+    union
+        {
+        struct
+            {
+#if BIGENDIAN
+            // We need to make sure vt overlaps with DECIMAL's wReserved.
+            // See the DECIMAL type for details.
+            WORD wReserved1;
+            VARTYPE vt;
+#else
+            VARTYPE vt;
+            WORD wReserved1;
+#endif
+            WORD wReserved2;
+            WORD wReserved3;
+            union
+                {
+                LONGLONG llVal;
+                LONG lVal;
+                BYTE bVal;
+                SHORT iVal;
+                FLOAT fltVal;
+                DOUBLE dblVal;
+                VARIANT_BOOL boolVal;
+                SCODE scode;
+                CY cyVal;
+                DATE date;
+                BSTR bstrVal;
+                interface IUnknown *punkVal;
+                interface IDispatch *pdispVal;
+                SAFEARRAY *parray;
+                BYTE *pbVal;
+                SHORT *piVal;
+                LONG *plVal;
+                LONGLONG *pllVal;
+                FLOAT *pfltVal;
+                DOUBLE *pdblVal;
+                VARIANT_BOOL *pboolVal;
+                SCODE *pscode;
+                CY *pcyVal;
+                DATE *pdate;
+                BSTR *pbstrVal;
+                interface IUnknown **ppunkVal;
+                VARIANT *pvarVal;
+                PVOID byref;
+                CHAR cVal;
+                USHORT uiVal;
+                ULONG ulVal;
+                ULONGLONG ullVal;
+                INT intVal;
+                UINT uintVal;
+                DECIMAL *pdecVal;
+                CHAR *pcVal;
+                USHORT *puiVal;
+                ULONG *pulVal;
+                ULONGLONG *pullVal;
+                INT *pintVal;
+                UINT *puintVal;
+                struct __tagBRECORD
+                    {
+                    PVOID pvRecord;
+                    interface IRecordInfo *pRecInfo;
+                    } brecVal;
+                } n3;
+            } n2;
+        DECIMAL decVal;
+        } n1;
+    };
+
+typedef VARIANT VARIANTARG, *LPVARIANTARG;
+
+interface IDispatch;
+interface ITypeInfo;
+interface ITypeLib;
+interface IMoniker;
+
+#include "unknwn.h"
 
 #else
 #define WCHAR(str) L##str
