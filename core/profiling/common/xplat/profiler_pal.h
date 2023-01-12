@@ -183,6 +183,7 @@ typedef struct
 #define E_PENDING                        (HRESULT)0x8000000AL
 
 #define _In_reads_opt_(x) x
+#define _Out_writes_to_(x) x
 
 #else
 #define WCHAR(str) L##str
