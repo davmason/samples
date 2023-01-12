@@ -6,10 +6,9 @@
 
 #ifndef WIN32
 #include <cstdlib>
-#include "pal_mstypes.h"
-#include "pal.h"
-#include "ntimage.h"
-#include "corhdr.h"
+
+#define interface struct
+
 #define WCHAR(str) u##str
 
 #define CoTaskMemAlloc(cb) malloc(cb)

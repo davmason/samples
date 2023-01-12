@@ -16,6 +16,7 @@
 #include <string>
 #include <condition_variable>
 #include <map>
+#include "profiler_pal.h"
 #include "cor.h"
 #include "corprof.h"
 #include "eventpipemetadatareader.h"
