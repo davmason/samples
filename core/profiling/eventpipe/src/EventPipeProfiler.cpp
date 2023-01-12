@@ -4,7 +4,9 @@
 
 #include "EventPipeProfiler.h"
 #include "corhlpr.h"
+#ifndef WIN32
 #include "profiler_pal.h"
+#endif // WIN32
 #include <string>
 #include <sstream>
 #include <assert.h>

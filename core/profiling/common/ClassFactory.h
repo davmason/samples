@@ -6,7 +6,9 @@
 
 #define NOMINMAX
 
+#ifndef WIN32
 #include "profiler_pal.h"
+#endif // WIN32
 #include "unknwn.h"
 #include <atomic>
 

@@ -10,7 +10,9 @@
 #include <mutex>
 #include <vector>
 #include <condition_variable>
+#ifndef WIN32
 #include "profiler_pal.h"
+#endif // WIN32
 #include "cor.h"
 #include "corprof.h"
 #include "sampler.h"

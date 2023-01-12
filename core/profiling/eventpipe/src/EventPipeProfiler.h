@@ -16,7 +16,9 @@
 #include <string>
 #include <condition_variable>
 #include <map>
+#ifndef WIN32
 #include "profiler_pal.h"
+#endif // WIN32
 #include "cor.h"
 #include "corprof.h"
 #include "eventpipemetadatareader.h"

@@ -3,7 +3,6 @@
 
 #include "SampleProfiler.h"
 #include "corhlpr.h"
-#include "profiler_pal.h"
 #include "sampler.h"
 #include <string>
 #include <assert.h>
