@@ -115,6 +115,21 @@ typedef HANDLE HRSRC;
 typedef LONG HRESULT;
 typedef LONG NTSTATUS;
 
+#ifndef GUID_DEFINED
+typedef struct _GUID {
+    ULONG   Data1;    // NOTE: diff from Win32, for LP64
+    USHORT  Data2;
+    USHORT  Data3;
+    UCHAR   Data4[ 8 ];
+} GUID;
+typedef const GUID *LPCGUID;
+#define GUID_DEFINED
+
+typedef GUID IID;
+
+#define REFGUID const GUID &
+#define REFIID const IID &
+
 #else
 #define WCHAR(str) L##str
 #define PROFILER_STUB EXTERN_C void STDMETHODCALLTYPE
