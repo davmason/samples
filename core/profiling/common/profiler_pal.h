@@ -6,6 +6,7 @@
 
 #ifndef WIN32
 #include <cstdlib>
+#include <cinttypes>
 
 #define interface struct
 
@@ -20,11 +21,13 @@
 
 typedef void VOID;
 
-typedef int LONG;       // NOTE: diff from windows.h, for LP64 compat
-typedef unsigned int ULONG; // NOTE: diff from windows.h, for LP64 compat
+typedef int LONG;
+typedef unsigned int ULONG;
+typedef intptr_t INT_PTR
+typedef uintptr_t UINT_PTR
 
-typedef __int64 LONGLONG;
-typedef unsigned __int64 ULONGLONG;
+typedef int64_t LONGLONG;
+typedef unsigned int64_t ULONGLONG;
 typedef ULONGLONG DWORD64;
 typedef DWORD64 *PDWORD64;
 typedef LONGLONG *PLONG64;
@@ -70,24 +73,23 @@ typedef unsigned int *PUINT;
 typedef BYTE BOOLEAN;
 typedef BOOLEAN *PBOOLEAN;
 
-typedef unsigned __int8 UINT8;
-typedef signed __int8 INT8;
-typedef unsigned __int16 UINT16;
-typedef signed __int16 INT16;
-typedef unsigned __int32 UINT32, *PUINT32;
-typedef signed __int32 INT32, *PINT32;
-typedef unsigned __int64 UINT64, *PUINT64;
-typedef signed __int64 INT64, *PINT64;
+typedef unsigned int8_t UINT8;
+typedef signed int8_t INT8;
+typedef unsigned int16_t UINT16;
+typedef signed int16_t INT16;
+typedef unsigned int32_t UINT32, *PUINT32;
+typedef signed int32_t INT32, *PINT32;
+typedef unsigned int64_t UINT64, *PUINT64;
+typedef signed int64_t INT64, *PINT64;
 
-typedef unsigned __int32 ULONG32, *PULONG32;
-typedef signed __int32 LONG32, *PLONG32;
-typedef unsigned __int64 ULONG64;
-typedef signed __int64 LONG64;
+typedef unsigned int32_t ULONG32, *PULONG32;
+typedef signed int32_t LONG32, *PLONG32;
+typedef unsigned int64_t ULONG64;
+typedef signed int64_t LONG64;
 
 
 typedef VOID *HANDLE;
 typedef HANDLE HWND;
-typedef struct __PAL_RemoteHandle__ { HANDLE h; } *RHANDLE;
 typedef HANDLE *PHANDLE;
 typedef HANDLE *LPHANDLE;
 #define INVALID_HANDLE_VALUE ((VOID *)(-1))
