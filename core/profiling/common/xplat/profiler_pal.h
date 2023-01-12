@@ -131,6 +131,13 @@ typedef IID CLSID;
 #define REFGUID const GUID &
 #define REFIID const IID &
 
+inline int IsEqualGUID(REFGUID rguid1, REFGUID rguid2)
+    { return !memcmp(&rguid1, &rguid2, sizeof(GUID)); }
+inline int operator==(REFGUID guidOne, REFGUID guidOther)
+    { return IsEqualGUID(guidOne,guidOther); }
+inline int operator!=(REFGUID guidOne, REFGUID guidOther)
+    { return !IsEqualGUID(guidOne,guidOther); }
+
 typedef LONG32 mdToken;
 typedef mdToken mdModule;
 typedef mdToken mdTypeDef;

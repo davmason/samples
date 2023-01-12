@@ -40,7 +40,7 @@ typedef /* [unique] */ IUnknown *LPUNKNOWN;
 #define __IClassFactory_INTERFACE_DEFINED__
 
 // 00000001-0000-0000-C000-000000000046
-EXTERN_C const GUID IID_IClassFactory;
+EXTERN_C const IID IID_IClassFactory;
 
 MIDL_INTERFACE("00000001-0000-0000-C000-000000000046")
 IClassFactory : public IUnknown
