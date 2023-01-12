@@ -93,11 +93,11 @@ typedef int64_t LONG64;
 
 typedef WCHAR *PWCHAR;
 typedef WCHAR *LPWCH, *PWCH;
-typedef CONST WCHAR *LPCWCH, *PCWCH;
+typedef const WCHAR *LPCWCH, *PCWCH;
 typedef WCHAR *NWPSTR;
 typedef WCHAR *LPWSTR, *PWSTR;
 
-typedef CONST WCHAR *LPCWSTR, *PCWSTR;
+typedef const WCHAR *LPCWSTR, *PCWSTR;
 
 typedef VOID *HANDLE;
 typedef HANDLE HWND;
@@ -124,6 +124,7 @@ typedef struct _GUID {
 } GUID;
 typedef const GUID *LPCGUID;
 #define GUID_DEFINED
+#endif // !GUID_DEFINED
 
 typedef GUID IID;
 
