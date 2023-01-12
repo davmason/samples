@@ -20,12 +20,14 @@
 
 typedef void VOID;
 typedef int LONG;
+typedef unsigned int ULONG;
 typedef int BOOL;
 typedef unsigned char BYTE;
 typedef unsigned __int32 ULONG32, *PULONG32;
 typedef signed __int32 LONG32, *PLONG32;
 typedef unsigned __int64 ULONG64;
 typedef signed __int64 LONG64;
+typedef unsigned __int64 UINT_PTR, *PUINT_PTR;
 
 typedef LONG HRESULT;
 
