@@ -21,7 +21,7 @@ typedef /* [unique] */ IUnknown *LPUNKNOWN;
 EXTERN_C const IID IID_IUnknown;
 
 MIDL_INTERFACE("00000000-0000-0000-C000-000000000046")
-IUnknown
+struct IUnknown
 {
     virtual HRESULT STDMETHODCALLTYPE QueryInterface(
         REFIID riid,
@@ -31,6 +31,8 @@ IUnknown
 
     virtual ULONG STDMETHODCALLTYPE Release( void) = 0;
 };
+
+typedef struct IUnknown IUnknown;
 
 #endif // __IUnknown_INTERFACE_DEFINED__
 
