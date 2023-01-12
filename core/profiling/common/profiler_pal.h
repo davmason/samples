@@ -131,6 +131,13 @@ typedef GUID IID;
 #define REFGUID const GUID &
 #define REFIID const IID &
 
+typedef LONG32 mdToken;
+typedef mdToken mdModule;
+typedef mdToken mdTypeDef;
+typedef mdToken mdMethodDef;
+typedef mdToken mdFieldDef;
+typedef ULONG CorElementType;
+
 #else
 #define WCHAR(str) L##str
 #define PROFILER_STUB EXTERN_C void STDMETHODCALLTYPE
