@@ -62,7 +62,7 @@ public:
         if (pUnkOuter != nullptr)
         {
             *ppvObject = nullptr;
-            return CLASS_E_NOAGGREGATION;
+            return E_FAIL;
         }
 
         T* profiler = new T();

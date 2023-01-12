@@ -117,34 +117,16 @@ typedef HANDLE HRSRC;
 typedef LONG HRESULT;
 typedef LONG NTSTATUS;
 
-#ifndef GUID_DEFINED
 typedef struct _GUID {
     ULONG   Data1;    // NOTE: diff from Win32, for LP64
     USHORT  Data2;
     USHORT  Data3;
     UCHAR   Data4[ 8 ];
 } GUID;
+
 typedef const GUID *LPCGUID;
-#define GUID_DEFINED
-#endif // !GUID_DEFINED
-
-#ifndef __IID_DEFINED__
-#define __IID_DEFINED__
-
-typedef struct _IID
-{
-    unsigned long x;
-    unsigned short s1;
-    unsigned short s2;
-    unsigned char  c[8];
-} IID;
-
-#endif // __IID_DEFINED__
-
-#ifndef CLSID_DEFINED
-#define CLSID_DEFINED
+typedef GUID IID;
 typedef IID CLSID;
-#endif // CLSID_DEFINED
 
 #define REFGUID const GUID &
 #define REFIID const IID &
