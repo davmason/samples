@@ -8,6 +8,8 @@
 #include <cstdlib>
 #include <cinttypes>
 
+#define EXTERN_C extern "C"
+#define __stdcall
 #define interface struct
 
 #define WCHAR(str) u##str
@@ -23,8 +25,8 @@ typedef void VOID;
 
 typedef int LONG;
 typedef unsigned int ULONG;
-typedef intptr_t INT_PTR
-typedef uintptr_t UINT_PTR
+typedef intptr_t INT_PTR;
+typedef uintptr_t UINT_PTR;
 
 typedef int64_t LONGLONG;
 typedef uint64_t ULONGLONG;
@@ -66,7 +68,7 @@ typedef DWORD *PDWORD;
 typedef DWORD *LPDWORD;
 typedef void *PVOID;
 typedef void *LPVOID;
-typedef CONST void *LPCVOID;
+typedef const void *LPCVOID;
 typedef int INT;
 typedef unsigned int UINT;
 typedef unsigned int *PUINT;
