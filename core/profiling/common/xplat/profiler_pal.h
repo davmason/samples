@@ -134,6 +134,7 @@ typedef IID CLSID;
 
 #define REFGUID const GUID &
 #define REFIID const IID &
+#define REFCLSID const CLSID &
 
 inline int IsEqualGUID(REFGUID rguid1, REFGUID rguid2)
     { return !memcmp(&rguid1, &rguid2, sizeof(GUID)); }
