@@ -6,6 +6,7 @@
 
 #define NOMINMAX
 
+#include "profiler_pal.h"
 #include "unknwn.h"
 #include <atomic>
 
