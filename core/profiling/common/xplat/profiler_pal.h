@@ -7,6 +7,7 @@
 #ifndef WIN32
 #include <cstdlib>
 #include <cinttypes>
+#include <cstring>
 
 #define EXTERN_C extern "C"
 #define __stdcall
