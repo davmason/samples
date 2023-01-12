@@ -8,12 +8,12 @@ endif(NOT WIN32)
 if (WIN32)
     set(BASE_SOURCES
         ${BASE_SOURCES}
-        src/CorProfiler.def)
+        src/SampleProfiler.def)
 endif(WIN32)
 
 set(SOURCES
-    src/ClassFactory.cpp
-    src/CorProfiler.cpp
+    ${BASE_SOURCES}
+    src/SampleProfiler.cpp
     src/dllmain.cpp
     src/sampler.cpp)
 

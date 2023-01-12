@@ -8,15 +8,14 @@ endif(NOT WIN32)
 if (WIN32)
     set(BASE_SOURCES
         ${BASE_SOURCES}
-        src/CorProfiler.def)
+        src/EventPipeProfiler.def)
 
     add_compile_options(/std:c++17)
 endif(WIN32)
 
 set(SOURCES
     ${BASE_SOURCES}
-    src/ClassFactory.cpp
-    src/CorProfiler.cpp
+    src/EventPipeProfiler.cpp
     src/dllmain.cpp
     src/eventpipemetadatareader.cpp
     src/eventpipeeventprinter.cpp)

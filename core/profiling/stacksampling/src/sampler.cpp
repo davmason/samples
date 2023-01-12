@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-#include "CorProfiler.h"
+#include "SampleProfiler.h"
 #include "sampler.h"
 #include <thread>
 #include <cwchar>
@@ -34,14 +34,14 @@ HRESULT __stdcall DoStackSnapshotStackSnapShotCallbackWrapper(
         clientData);
 }
 
-Sampler::Sampler(ICorProfilerInfo10* pProfInfo, CorProfiler *parent) :
+Sampler::Sampler(ICorProfilerInfo10* pProfInfo, SampleProfiler *parent) :
     m_workerThread(DoSampling, pProfInfo, parent)
 {
     Sampler::s_instance = this;
 }
 
 // static
-void Sampler::DoSampling(ICorProfilerInfo10 *pProfInfo, CorProfiler *parent)
+void Sampler::DoSampling(ICorProfilerInfo10 *pProfInfo, SampleProfiler *parent)
 {
     Sampler::Instance()->corProfilerInfo = parent->corProfilerInfo;
 

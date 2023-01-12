@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #include "ClassFactory.h"
+#include "SampleProfiler.h"
 
 const IID IID_IUnknown      = { 0x00000000, 0x0000, 0x0000, { 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46 } };
 
@@ -23,7 +24,7 @@ extern "C" HRESULT STDMETHODCALLTYPE DllGetClassObject(REFCLSID rclsid, REFIID r
         return E_FAIL;
     }
 
-    auto factory = new ClassFactory;
+    auto factory = new ClassFactory<SampleProfiler>;
     if (factory == nullptr)
     {
         return E_FAIL;

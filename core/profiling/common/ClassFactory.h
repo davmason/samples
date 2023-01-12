@@ -16,11 +16,63 @@ class ClassFactory : public IClassFactory
 private:
     std::atomic<int> refCount;
 public:
-    ClassFactory();
-    virtual ~ClassFactory();
-    HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void **ppvObject) override;
-    ULONG   STDMETHODCALLTYPE AddRef(void) override;
-    ULONG   STDMETHODCALLTYPE Release(void) override;
-    HRESULT STDMETHODCALLTYPE CreateInstance<T>(IUnknown *pUnkOuter, REFIID riid, void **ppvObject) override;
-    HRESULT STDMETHODCALLTYPE LockServer(BOOL fLock) override;
+
+    ClassFactory() : refCount(0)
+    {
+    }
+
+    ~ClassFactory()
+    {
+    }
+
+    HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void **ppvObject)
+    {
+        if (riid == IID_IUnknown || riid == IID_IClassFactory)
+        {
+            *ppvObject = this;
+            this->AddRef();
+            return S_OK;
+        }
+
+        *ppvObject = nullptr;
+        return E_NOINTERFACE;
+    }
+
+    ULONG STDMETHODCALLTYPE AddRef()
+    {
+        return std::atomic_fetch_add(&this->refCount, 1) + 1;
+    }
+
+    ULONG STDMETHODCALLTYPE Release()
+    {
+        int count = std::atomic_fetch_sub(&this->refCount, 1) - 1;
+        if (count <= 0)
+        {
+            delete this;
+        }
+
+        return count;
+    }
+
+    HRESULT STDMETHODCALLTYPE CreateInstance(IUnknown *pUnkOuter, REFIID riid, void **ppvObject)
+    {
+        if (pUnkOuter != nullptr)
+        {
+            *ppvObject = nullptr;
+            return CLASS_E_NOAGGREGATION;
+        }
+
+        T* profiler = new T();
+        if (profiler == nullptr)
+        {
+            return E_FAIL;
+        }
+
+        return profiler->QueryInterface(riid, ppvObject);
+    }
+
+    HRESULT STDMETHODCALLTYPE LockServer(BOOL fLock)
+    {
+        return S_OK;
+    }
 };
