@@ -54,6 +54,9 @@ typedef unsigned int DWORD; // NOTE: diff from  windows.h, for LP64 compat
 typedef unsigned int DWORD32, *PDWORD32;
 
 typedef int BOOL;
+#define TRUE 1
+#define FALSE 0
+
 typedef unsigned char BYTE;
 typedef unsigned short WORD;
 typedef float FLOAT;
