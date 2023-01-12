@@ -42,7 +42,7 @@ ULONG STDMETHODCALLTYPE ClassFactory::Release()
     return count;
 }
 
-HRESULT STDMETHODCALLTYPE ClassFactory::CreateInstance(IUnknown *pUnkOuter, REFIID riid, void **ppvObject)
+HRESULT STDMETHODCALLTYPE ClassFactory::CreateInstance<T>(IUnknown *pUnkOuter, REFIID riid, void **ppvObject)
 {
     if (pUnkOuter != nullptr)
     {
@@ -50,7 +50,7 @@ HRESULT STDMETHODCALLTYPE ClassFactory::CreateInstance(IUnknown *pUnkOuter, REFI
         return CLASS_E_NOAGGREGATION;
     }
 
-    CorProfiler* profiler = new CorProfiler();
+    T* profiler = new T();
     if (profiler == nullptr)
     {
         return E_FAIL;

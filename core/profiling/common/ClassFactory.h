@@ -4,9 +4,13 @@
 
 #pragma once
 
+#define NOMINMAX
+
 #include "unknwn.h"
 #include <atomic>
 
+template
+<class T>
 class ClassFactory : public IClassFactory
 {
 private:
@@ -17,6 +21,6 @@ public:
     HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void **ppvObject) override;
     ULONG   STDMETHODCALLTYPE AddRef(void) override;
     ULONG   STDMETHODCALLTYPE Release(void) override;
-    HRESULT STDMETHODCALLTYPE CreateInstance(IUnknown *pUnkOuter, REFIID riid, void **ppvObject) override;
+    HRESULT STDMETHODCALLTYPE CreateInstance<T>(IUnknown *pUnkOuter, REFIID riid, void **ppvObject) override;
     HRESULT STDMETHODCALLTYPE LockServer(BOOL fLock) override;
 };
