@@ -17,7 +17,8 @@
 
 #define MIDL_INTERFACE(x)   struct DECLSPEC_UUID(x) DECLSPEC_NOVTABLE
 
-#define EXTERN_GUID(itf,l1,s1,s2,c1,c2,c3,c4,c5,c6,c7,c8) 
+#define EXTERN_GUID(itf,l1,s1,s2,c1,c2,c3,c4,c5,c6,c7,c8) \
+    const IID itf = {l1,s1,s2,{c1,c2,c3,c4,c5,c6,c7,c8}}
 
 interface IRpcStubBuffer;
 interface IRpcChannelBuffer;
