@@ -138,6 +138,20 @@ typedef mdToken mdMethodDef;
 typedef mdToken mdFieldDef;
 typedef ULONG CorElementType;
 
+typedef struct
+{
+    USHORT usMajorVersion;
+    USHORT usMinorVersion;
+    USHORT usBuildNumber;
+    USHORT usRevisionNumber;
+    LPWSTR szLocale;
+    ULONG cbLocale;
+    DWORD *rProcessor;
+    ULONG ulProcessor;
+    OSINFO *rOS;
+    ULONG ulOS;
+}   ASSEMBLYMETADATA;
+
 #else
 #define WCHAR(str) L##str
 #define PROFILER_STUB EXTERN_C void STDMETHODCALLTYPE
