@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <cinttypes>
 #include <cstring>
+#include <assert.h>
 
 #define EXTERN_C extern "C"
 #define __stdcall
@@ -188,6 +189,8 @@ typedef struct
 
 #define _In_reads_opt_(x)
 #define _Out_writes_to_(x, y)
+
+#define _ASSERTE(condition) condition
 
 #else
 #define WCHAR(str) L##str
