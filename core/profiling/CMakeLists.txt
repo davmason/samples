@@ -7,5 +7,12 @@ set(BASE_SOURCES
 
 include_directories(common)
 
+if(NOT WIN32)
+    add_compile_options(-Wno-invalid-noreturn -Wno-pragma-pack -Wno-int-to-pointer-cast -fPIC -fms-extensions -DBIT64 -DPAL_STDCPP_COMPAT -DPLATFORM_UNIX -DHOST_64BIT -std=c++17)
+    add_link_options(--no-undefined -pthread)
+    
+    include_directories(common/xplat)
+endif(NOT WIN32)
+
 add_subdirectory(eventpipe)
 add_subdirectory(stacksampling)
