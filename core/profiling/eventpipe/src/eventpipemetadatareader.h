@@ -10,6 +10,7 @@
 #include <vector>
 #include <memory>
 #include <assert.h>
+#include "profiler_pal.h"
 #include "cor.h"
 #include "corprof.h"
 #include "profilerstring.h"
