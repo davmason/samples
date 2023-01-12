@@ -1,36 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
-
-/* this ALWAYS GENERATED file contains the IIDs and CLSIDs */
-
-/* link this file in with the server and any clients */
-
-
- /* File created by MIDL compiler version 8.01.0622 */
-/* @@MIDL_FILE_HEADING(  ) */
-
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
-
-
-#ifdef __cplusplus
-extern "C"{
-#endif
-
-
 #include <rpc.h>
 #include <rpcndr.h>
 
-#ifdef _MIDL_USE_GUIDDEF_
-
-#ifndef INITGUID
-#define INITGUID
-#include <guiddef.h>
-#undef INITGUID
-#else
-#include <guiddef.h>
-#endif
+#define DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+        EXTERN_C DLLEXPORT constexpr GUID name \
+                = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
 
 #define MIDL_DEFINE_GUID(type,name,l,w1,w2,b1,b2,b3,b4,b5,b6,b7,b8) \
         DEFINE_GUID(name,l,w1,w2,b1,b2,b3,b4,b5,b6,b7,b8)
